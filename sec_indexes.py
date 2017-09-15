@@ -19,12 +19,12 @@ spark = SparkSession.builder \
             .getOrCreate()
 
 def get_value(refEntity, key):
-    print("Start of get value-really I meanit")
+    print("Start of get value")
     res=None
     try:
         res = refEntity[key]
     finally:
-        
+
     return(res)
 
 def process_SEC_rss(year, month):
