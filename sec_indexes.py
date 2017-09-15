@@ -21,7 +21,7 @@ spark = SparkSession.builder \
 def get_value(refEntity, key):
     print("Start of get value-really I meanit")
     try:
-        res = refEntity[key]+"XXX"
+        res = refEntity[key]
     finally:
         print("Result="+res)
     return(res)
@@ -57,7 +57,9 @@ def process_SEC_rss(year, month):
                 'filingInfo' : filingInfo['edgar:period'],
                 'fiscalYearEnd' : filingInfo['edgar:fiscalYearEnd'],
             }
+            print("-----------------")
             print(newRow)
+            print("-----------------")
             producer.send('sec_filing',json.dumps(newRow))
 
 
