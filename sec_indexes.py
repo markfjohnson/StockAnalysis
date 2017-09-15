@@ -46,18 +46,18 @@ def process_SEC_rss(year, month):
     #        xbrlFiles = filingInfo['edgar:xbrlFiles']['edgar:xbrlFile']
             newRow = {
                 'companyName': get_value(filingInfo, 'edgar:companyName'),
-                'guid': entry['guid'],
+                'guid': get_value(entry,'guid'),
                 'xml_filing': index_rss,
-                'pubDate' : entry['pubDate'],
+                'pubDate' : get_value(entry,'pubDate'),
                 'formType': formType,
-                'filingDate': filingInfo['edgar:filingDate'],
-                'cikNumbver':  filingInfo['edgar:cikNumber'],
-                'accessionNumber':  filingInfo['edgar:accessionNumber'],
-                'fileNumber' :  filingInfo['edgar:fileNumber'],
-                'filingInfo' : filingInfo['edgar:period'],
-                'fiscalYearEnd' : filingInfo['edgar:fiscalYearEnd'],
+                'filingDate': get_value(filingInfo,'edgar:filingDate'),
+                'cikNumbver':  get_value(filingInfo,'edgar:cikNumber'),
+                'accessionNumber':  get_value(filingInfo,'edgar:accessionNumber'),
+                'fileNumber' :  get_value(filingInfo,'edgar:fileNumber'),
+                'filingInfo' : get_value(filingInfo,'edgar:period'),
+                'fiscalYearEnd' : get_value(filingInfo,'edgar:fiscalYearEnd'),
             }
-            print("-----------------")
+            print("---------------XX--")
             print(newRow)
             print("-----------------")
             producer.send('sec_filing',json.dumps(newRow))
