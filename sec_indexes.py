@@ -44,6 +44,7 @@ def process_SEC_rss(year, month):
                      fileNumber=filingInfo['edgar:fileNumber'],
                      filingInfo=filingInfo['edgar:period'],
                      fiscalYearEnd=filingInfo['edgar:fiscalYearEnd'])
+        print(newRow)
         producer.send('sec_filing',bytes('ABC'))
 
 
