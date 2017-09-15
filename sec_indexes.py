@@ -2,12 +2,16 @@
 import urllib2
 import xmltodict
 
-
 from kafka import KafkaConsumer, KafkaProducer
 from pyspark.sql import *
 
-kafka_url = "api.kafka.marathon.l4lb.thisdcos.directory:80"
+__all__ = ["SparkSession"]
 
+kafka_url = "api.kafka.marathon.l4lb.thisdcos.directory:80"
+spark = SparkSession.builder \
+            .master("local") \
+            .appName("Read SEC XBRL RSS files into Kafka") \
+            .getOrCreate()
 
 
 
