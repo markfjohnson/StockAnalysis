@@ -20,6 +20,7 @@ spark = SparkSession.builder \
 
 def get_value(refEntity, key):
     print("Start of get value-really I meanit")
+    res=None
     try:
         res = refEntity[key]
     finally:
