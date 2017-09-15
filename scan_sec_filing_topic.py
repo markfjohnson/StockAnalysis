@@ -8,7 +8,7 @@ spark = SparkSession.builder \
     .appName("Read SEC XBRL Kafka references to SEC filings") \
     .getOrCreate()
 
-sc = spark.sparkContext()
+sc = spark.sparkContext
 
 def analyze_and_save_filing(new_filing):
     print (new_filing)
