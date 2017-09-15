@@ -21,7 +21,7 @@ spark = SparkSession.builder \
 def get_value(refEntity, key):
     res = None
     try:
-        res=refEntity[key]
+        res=refEntity[key]+"XXX"
     finally:
         print(refEntity)
     return(res)
