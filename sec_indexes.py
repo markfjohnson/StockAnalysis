@@ -5,7 +5,7 @@ import json
 
 # sample program
 
-from kafka import KafkaConsumer, KafkaProducer
+from kafka import KafkaProducer
 from pyspark.sql import *
 
 __all__ = ["SparkSession"]
