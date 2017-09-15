@@ -41,7 +41,6 @@ def process_SEC_rss(item):
     for entry in item_list:
         formType = entry['edgar:xbrlFiling']['edgar:formType']
         filingInfo = entry['edgar:xbrlFiling']
-        print(formType, filingInfo['edgar:companyName'])
         newRow = []
         if (formType=='10-Q' or formType=='10-K'):
             newRow = {
@@ -57,7 +56,6 @@ def process_SEC_rss(item):
                 'filingInfo' : get_value(filingInfo,'edgar:period'),
                 'fiscalYearEnd' : get_value(filingInfo,'edgar:fiscalYearEnd'),
             }
-            print(newRow)
             producer.send('sec_filing',json.dumps(newRow))
 
 
