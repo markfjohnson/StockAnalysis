@@ -7,7 +7,9 @@ from pyspark.sql import *
 
 __all__ = ["SparkSession"]
 
-kafka_url = "api.kafka.marathon.l4lb.thisdcos.directory:80"
+
+#kafka_url = "api.kafka.marathon.l4lb.thisdcos.directory:80"
+kafka_url = "broker-0.kafka.mesos:9843"
 spark = SparkSession.builder \
             .master("local") \
             .appName("Read SEC XBRL RSS files into Kafka") \
