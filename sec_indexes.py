@@ -17,6 +17,7 @@ spark = SparkSession.builder \
             .master("local") \
             .appName("Read SEC XBRL RSS files into Kafka") \
             .getOrCreate()
+sc = spark.sparkContext
 
 def get_value(refEntity, key):
     print("Start of get value")
@@ -26,9 +27,10 @@ def get_value(refEntity, key):
     finally:
         return(res)
 
-def process_SEC_rss(year, month):
+def process_SEC_rss(item):
+
     producer = KafkaProducer(bootstrap_servers=kafka_url)
-    index_rss = 'http://www.sec.gov/Archives/edgar/monthly/xbrlrss-' + str(year) + '-' + str(month).zfill(2) + '.xml'
+    index_rss = 'http://www.sec.gov/Archives/edgar/monthly/xbrlrss-{}.xml'.format(item)
 
     rss_feed = urllib2.urlopen(index_rss)
     index_data = rss_feed.read()
@@ -43,7 +45,6 @@ def process_SEC_rss(year, month):
         print(formType, filingInfo['edgar:companyName'])
         newRow = []
         if (formType=='10-Q' or formType=='10-K'):
-    #        xbrlFiles = filingInfo['edgar:xbrlFiles']['edgar:xbrlFile']
             newRow = {
                 'companyName': get_value(filingInfo, 'edgar:companyName'),
                 'guid': get_value(entry,'guid'),
@@ -61,6 +62,20 @@ def process_SEC_rss(year, month):
             producer.send('sec_filing',json.dumps(newRow))
 
 
+def build_processing_list():
+    process_list = []
+    for year in range(2000,2017):
+        for month in range(1,12):
+            process_list.append("{}-{}",year,str(month).zfill(2) )
+    return(process_list)
+
+
+def bulk_process_months():
+    process_list = sc.parallelize(build_processing_list())
+    process_list.map(lambda mnth: process_list(mnth))
+
+
+
 if __name__ == "__main__":
-    process_SEC_rss(2017,8)
+    process_SEC_rss("2017-08")
 
