@@ -35,19 +35,21 @@ def process_SEC_rss(year, month):
         newRow = []
         if (formType=='10-Q' or formType=='10-K'):
     #        xbrlFiles = filingInfo['edgar:xbrlFiles']['edgar:xbrlFile']
-            newRow['companyName'] = filingInfo['edgar:companyName']
-            newRow['guid'] =entry['guid']
-            newRow['xml_filing'] =index_rss
-            newRow['pubDate'] = entry['pubDate']
-            newRow['formType'] = formType
-            newRow['filingDate'] = filingInfo['edgar:filingDate']
-            newRow['cikNumbver'] = filingInfo['edgar:cikNumber']
-            newRow['accessionNumber'] = filingInfo['edgar:accessionNumber']
-            newRow['fileNumber'] = filingInfo['edgar:fileNumber']
-            newRow['filingInfo'] = filingInfo['edgar:period']
-            newRow['fiscalYearEnd'] = filingInfo['edgar:fiscalYearEnd']
+            newRow = {
+                'companyName': filingInfo['edgar:companyName'],
+                'guid': entry['guid'],
+                'xml_filing': index_rss,
+                'pubDate' : entry['pubDate'],
+                'formType': formType,
+                'filingDate': filingInfo['edgar:filingDate'],
+                'cikNumbver':  filingInfo['edgar:cikNumber'],
+                'accessionNumber':  filingInfo['edgar:accessionNumber'],
+                'fileNumber' :  filingInfo['edgar:fileNumber'],
+                'filingInfo' : filingInfo['edgar:period'],
+                'fiscalYearEnd' : filingInfo['edgar:fiscalYearEnd'],
+            }
             print(newRow)
-            producer.send('sec_filing',newRow)
+            producer.send('sec_filing',json.dumps(newRow))
 
 
 if __name__ == "__main__":
