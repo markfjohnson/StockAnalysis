@@ -9,7 +9,7 @@ __all__ = ["SparkSession"]
 
 
 #kafka_url = "api.kafka.marathon.l4lb.thisdcos.directory:80"
-kafka_url = "broker-0.kafka.mesos:9843"
+kafka_url = "kafka-0-broker.kafka.autoip.dcos.thisdcos.directory:1025"
 spark = SparkSession.builder \
             .master("local") \
             .appName("Read SEC XBRL RSS files into Kafka") \
