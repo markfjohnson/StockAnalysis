@@ -24,7 +24,7 @@ def get_value(refEntity, key):
     try:
         res = refEntity[key]
     finally:
-        print("Result="+res)
+        
     return(res)
 
 def process_SEC_rss(year, month):
