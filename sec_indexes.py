@@ -32,19 +32,20 @@ def process_SEC_rss(year, month):
         formType = entry['edgar:xbrlFiling']['edgar:formType']
         filingInfo = entry['edgar:xbrlFiling']
         print(formType, filingInfo['edgar:companyName'])
+        newRow = []
         if (formType=='10-Q' or formType=='10-K'):
     #        xbrlFiles = filingInfo['edgar:xbrlFiles']['edgar:xbrlFile']
-            newRow = Row(companyName=bytearray(filingInfo['edgar:companyName']),
-                     guid=bytearray(entry['guid']),
-                     xml_filing=bytearray(index_rss),
-                     pubDate=bytearray(entry['pubDate']),
-                     formType=bytearray(formType),
-                     filingDate=bytearray(filingInfo['edgar:filingDate']),
-                     cikNumber=bytearray(filingInfo['edgar:cikNumber']),
-                     accessionNumber=bytearray(filingInfo['edgar:accessionNumber']),
-                     fileNumber=bytearray(filingInfo['edgar:fileNumber']),
-                     filingInfo=bytearray(filingInfo['edgar:period']),
-                     fiscalYearEnd=bytearray(filingInfo['edgar:fiscalYearEnd']))
+            newRow['companyName'] = filingInfo['edgar:companyName']
+            newRow['guid'] =entry['guid']
+            newRow['xml_filing'] =index_rss
+            newRow['pubDate'] = entry['pubDate']
+            newRow['formType'] = formType
+            newRow['filingDate'] = filingInfo['edgar:filingDate']
+            newRow['cikNumbver'] = filingInfo['edgar:cikNumber']
+            newRow['accessionNumber'] = filingInfo['edgar:accessionNumber']
+            newRow['fileNumber'] = filingInfo['edgar:fileNumber']
+            newRow['filingInfo'] = filingInfo['edgar:period']
+            newRow['fiscalYearEnd'] = filingInfo['edgar:fiscalYearEnd']
             print(newRow)
             producer.send('sec_filing',newRow)
 
