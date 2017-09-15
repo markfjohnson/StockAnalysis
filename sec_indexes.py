@@ -31,6 +31,7 @@ def process_SEC_rss(year, month):
     for entry in item_list:
         formType = entry['edgar:xbrlFiling']['edgar:formType']
         filingInfo = entry['edgar:xbrlFiling']
+        print(formType, filingInfo['edgar:companyName'])
 #        xbrlFiles = filingInfo['edgar:xbrlFiles']['edgar:xbrlFile']
         newRow = Row(companyName=filingInfo['edgar:companyName'],
                      guid=entry['guid'],
