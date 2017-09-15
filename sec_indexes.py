@@ -32,8 +32,9 @@ def process_SEC_rss(year, month):
         formType = entry['edgar:xbrlFiling']['edgar:formType']
         filingInfo = entry['edgar:xbrlFiling']
         print(formType, filingInfo['edgar:companyName'])
-#        xbrlFiles = filingInfo['edgar:xbrlFiles']['edgar:xbrlFile']
-        newRow = Row(companyName=filingInfo['edgar:companyName'],
+        if (formType=='10-Q' or formType=='10-K'):
+    #        xbrlFiles = filingInfo['edgar:xbrlFiles']['edgar:xbrlFile']
+            newRow = Row(companyName=filingInfo['edgar:companyName'],
                      guid=entry['guid'],
                      xml_filing=index_rss,
                      pubDate=entry['pubDate'],
@@ -44,8 +45,8 @@ def process_SEC_rss(year, month):
                      fileNumber=filingInfo['edgar:fileNumber'],
                      filingInfo=filingInfo['edgar:period'],
                      fiscalYearEnd=filingInfo['edgar:fiscalYearEnd'])
-        print(newRow)
-        producer.send('sec_filing',bytes('ABC'))
+            print(newRow)
+            producer.send('sec_filing',bytes('ABC'))
 
 
 if __name__ == "__main__":
