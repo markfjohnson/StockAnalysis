@@ -18,7 +18,13 @@ spark = SparkSession.builder \
             .appName("Read SEC XBRL RSS files into Kafka") \
             .getOrCreate()
 
-
+def get_value(refEntity, key):
+    res = None
+    try:
+        res=refEntity[key]
+    finally:
+        print(refEntity)
+    return(res)
 
 def process_SEC_rss(year, month):
     producer = KafkaProducer(bootstrap_servers=kafka_url)
@@ -39,7 +45,7 @@ def process_SEC_rss(year, month):
         if (formType=='10-Q' or formType=='10-K'):
     #        xbrlFiles = filingInfo['edgar:xbrlFiles']['edgar:xbrlFile']
             newRow = {
-                'companyName': filingInfo['edgar:companyName'],
+                'companyName': get_value(filingInfo, 'edgar:companyName'),
                 'guid': entry['guid'],
                 'xml_filing': index_rss,
                 'pubDate' : entry['pubDate'],
