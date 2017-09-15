@@ -24,8 +24,7 @@ def get_value(refEntity, key):
     try:
         res = refEntity[key]
     finally:
-
-    return(res)
+        return(res)
 
 def process_SEC_rss(year, month):
     producer = KafkaProducer(bootstrap_servers=kafka_url)
