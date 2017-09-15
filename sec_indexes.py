@@ -34,19 +34,19 @@ def process_SEC_rss(year, month):
         print(formType, filingInfo['edgar:companyName'])
         if (formType=='10-Q' or formType=='10-K'):
     #        xbrlFiles = filingInfo['edgar:xbrlFiles']['edgar:xbrlFile']
-            newRow = Row(companyName=filingInfo['edgar:companyName'],
-                     guid=entry['guid'],
-                     xml_filing=index_rss,
-                     pubDate=entry['pubDate'],
-                     formType=formType,
-                     filingDate=filingInfo['edgar:filingDate'],
-                     cikNumber=filingInfo['edgar:cikNumber'],
-                     accessionNumber=filingInfo['edgar:accessionNumber'],
-                     fileNumber=filingInfo['edgar:fileNumber'],
-                     filingInfo=filingInfo['edgar:period'],
-                     fiscalYearEnd=filingInfo['edgar:fiscalYearEnd'])
+            newRow = Row(companyName=bytearray(filingInfo['edgar:companyName']),
+                     guid=bytearray(entry['guid']),
+                     xml_filing=bytearray(index_rss),
+                     pubDate=bytearray(entry['pubDate']),
+                     formType=bytearray(formType),
+                     filingDate=bytearray(filingInfo['edgar:filingDate']),
+                     cikNumber=bytearray(filingInfo['edgar:cikNumber']),
+                     accessionNumber=bytearray(filingInfo['edgar:accessionNumber']),
+                     fileNumber=bytearray(filingInfo['edgar:fileNumber']),
+                     filingInfo=bytearray(filingInfo['edgar:period']),
+                     fiscalYearEnd=bytearray(filingInfo['edgar:fiscalYearEnd']))
             print(newRow)
-            producer.send('sec_filing',bytes('ABC'))
+            producer.send('sec_filing',newRow)
 
 
 if __name__ == "__main__":
