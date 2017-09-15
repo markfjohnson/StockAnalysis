@@ -1,6 +1,7 @@
 
 import urllib2
 import xmltodict
+import json
 
 from kafka import KafkaConsumer, KafkaProducer
 from pyspark.sql import *
