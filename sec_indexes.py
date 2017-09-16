@@ -56,6 +56,7 @@ def process_SEC_rss(item):
                 'filingInfo' : get_value(filingInfo,'edgar:period'),
                 'fiscalYearEnd' : get_value(filingInfo,'edgar:fiscalYearEnd'),
             }
+            print(get_value(filingInfo, 'edgar:companyName'))
             producer.send('sec_filing',json.dumps(newRow))
 
 
