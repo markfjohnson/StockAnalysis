@@ -27,7 +27,7 @@ def process_sec_filings():
 
     while True :
         filings = sc.parallelize(consumer.poll(50))
-        print("Processing {} new filings",len(filings))
+        print("Processing {} new filings",filings.count())
         filings.map( lambda f: analyze_and_save_filing(f))
 
 
