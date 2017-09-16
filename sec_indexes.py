@@ -37,7 +37,7 @@ def process_SEC_rss(item):
 
     index_doc = xmltodict.parse(index_data)
     item_list = index_doc['rss']['channel']['item']
-
+    print("RSS file processed")
     for entry in item_list:
         formType = entry['edgar:xbrlFiling']['edgar:formType']
         filingInfo = entry['edgar:xbrlFiling']
@@ -64,6 +64,7 @@ def build_processing_list():
     for year in range(2000,2017):
         for month in range(1,12):
             process_list.append("{}-{}",year,str(month).zfill(2) )
+    print("Built the list: {}",len(process_list))
     return(process_list)
 
 
