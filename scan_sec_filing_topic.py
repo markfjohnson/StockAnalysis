@@ -25,7 +25,8 @@ def process_sec_filings():
     current_filings = []
     for message in consumer:
         print(message)
-    #current_filings.append(message)
+        current_filings.append(message)
+        
     print("A")
     found_messages = len(current_filings)
     print("B")
