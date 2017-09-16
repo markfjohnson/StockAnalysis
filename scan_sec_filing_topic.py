@@ -19,6 +19,7 @@ def process_sec_filings():
 
     consumer = KafkaConsumer(bootstrap_servers=kafka_url,auto_offset_reset='earliest')
     consumer.subscribe(['sec_filing'])
+    print("Completed subscription")
 
     current_filings = []
     for message in consumer:
@@ -35,4 +36,6 @@ def process_sec_filings():
 
 
 if __name__ == "__main__":
+    print("Start scanner")
     process_sec_filings()
+    print("End scanner")
