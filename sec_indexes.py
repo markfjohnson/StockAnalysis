@@ -57,6 +57,7 @@ def process_SEC_rss(item):
                 'fiscalYearEnd' : get_value(filingInfo,'edgar:fiscalYearEnd'),
             }
             print(get_value(filingInfo, 'edgar:companyName'))
+            print("-----------------")
             producer.send('sec_filing',json.dumps(newRow))
 
 
@@ -65,7 +66,7 @@ def build_processing_list():
     for year in range(2000,2017):
         for month in range(1,12):
             process_list.append("{}-{}",year,str(month).zfill(2) )
-    print("Built the list: {}",len(process_list))
+    print("Built the processing list: {}",len(process_list))
     return(process_list)
 
 
