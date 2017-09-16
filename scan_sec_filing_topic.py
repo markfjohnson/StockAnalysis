@@ -11,6 +11,7 @@ spark = SparkSession.builder \
 sc = spark.sparkContext
 
 def analyze_and_save_filing(new_filing):
+    print("-------------")
     print (new_filing)
     print ("ABC"+"EFG")
 
