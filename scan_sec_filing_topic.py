@@ -25,13 +25,17 @@ def process_sec_filings():
     current_filings = []
     for message in consumer:
         current_filings.append(message)
-
+    print("A")
     found_messages = len(current_filings)
+    print("B")
     print("Found {} new filings.", found_messages)
 
     if (found_messages > 0):
+        print("C")
         filings = sc.parallelize(current_filings)
+        print("D")
         processed_filings = filings.map( lambda f: analyze_and_save_filing(f))
+        print("E")
         print(processed_filings)
 
 
