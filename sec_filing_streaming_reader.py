@@ -5,11 +5,14 @@ from pyspark.streaming import StreamingContext
 #    Kafka
 from pyspark.streaming.kafka import KafkaUtils
 #    json parsing
+import sys
+sys.path.append('/opt/spark/dist/jars')
 import json
 
 __all__ = ["SparkSession"]
 
 kafka_url = "broker.kafka.l4lb.thisdcos.directory:9092"
+kafka_url = "localhost:9092"
 batch_size = 5
 def setup_spark_streaming_receiver():
     sc = SparkContext(appName="SEC_Filings_Streaming_Processor")
