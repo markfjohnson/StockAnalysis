@@ -28,7 +28,7 @@ def get_value(refEntity, key):
 
 def process_SEC_rss(item):
     print("processing SEC filing for: {}", item)
-    print("test it")
+    print("test it and again")
     producer = KafkaProducer(bootstrap_servers=kafka_url)
     index_rss = 'http://www.sec.gov/Archives/edgar/monthly/xbrlrss-{}.xml'.format(item)
 
