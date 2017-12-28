@@ -85,7 +85,7 @@ def process_SEC_rss(item):
 
 def build_processing_list():
     process_list = []
-    for year in range(2010,2017):
+    for year in range(2016,2017):
         for month in range(1,12):
             process_list.append("{}-{}".format(year,str(month).zfill(2) ))
     print("Built the processing list: {}".format(len(process_list)))
@@ -100,7 +100,7 @@ def bulk_process_months():
 
 
 if __name__ == "__main__":
-    bulk_process_months()
-#     process_SEC_rss("2017-08")
+#    bulk_process_months()
+     process_SEC_rss("2017-08")
 
 

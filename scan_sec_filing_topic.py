@@ -20,7 +20,7 @@ def analyze_and_save_filing(new_filing):
 
 
 def process_sec_filings():
-    consumer = KafkaConsumer(bootstrap_servers=kafka_url,auto_offset_reset='earliest', enable_auto_commit=False, group_id='sec-processor')
+    consumer = KafkaConsumer(bootstrap_servers=kafka_url, enable_auto_commit=False, group_id='sec-processor')
     topics = consumer.topics()
     assignments = consumer.assignment()
     metrics = consumer.metrics()
@@ -30,10 +30,14 @@ def process_sec_filings():
     consumer.subscribe(topics)
 
     while True:
-        partitions = consumer.poll(100,100)
-        for msg in consumer:
+        i =0
+        a = consumer.poll(100,5)
+        for msg in a:
+            i = i + 1
             print msg
+            print i
         print "---------------------"
+
 
 
 
