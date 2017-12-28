@@ -79,7 +79,7 @@ def process_SEC_rss(item):
 
                 msg_count = msg_count + 1
 
-                print("***## Added {} sec filings".format(msg_count))
+                print("* Added {} sec filings".format(msg_count))
             except e:
                 print "Exception encountered {e}"
     metrics = producer.metrics()
