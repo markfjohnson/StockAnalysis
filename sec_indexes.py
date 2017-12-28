@@ -35,12 +35,10 @@ def get_value(refEntity, key):
         return(res)
 
 def process_SEC_rss(item):
-<<<<<<< HEAD
-=======
+
     print("processing SEC filing for: {}", item)
     print("test it and again")
     producer = KafkaProducer(bootstrap_servers=kafka_url)
->>>>>>> 3ddd8158bd97d4c9480d231baf31555a033bacc5
     index_rss = 'http://www.sec.gov/Archives/edgar/monthly/xbrlrss-{}.xml'.format(item)
     producer = KafkaProducer(bootstrap_servers=kafka_url)
     rss_feed = urllib2.urlopen(index_rss)
@@ -80,7 +78,7 @@ def process_SEC_rss(item):
                 msg_count = msg_count + 1
 
                 print("* Added {} sec filings".format(msg_count))
-            except e:
+            except Exception as e:
                 print "Exception encountered {e}"
     metrics = producer.metrics()
     print metrics
