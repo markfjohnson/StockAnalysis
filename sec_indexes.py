@@ -36,8 +36,8 @@ def get_value(refEntity, key):
 
 def process_SEC_rss(item):
 
-    print("processing SEC filing for: {}", item)
-    print("test it and again")
+    #print("processing SEC filing for: {}", item)
+    #print("test it and again")
     producer = KafkaProducer(bootstrap_servers=kafka_url)
     index_rss = 'http://www.sec.gov/Archives/edgar/monthly/xbrlrss-{}.xml'.format(item)
     producer = KafkaProducer(bootstrap_servers=kafka_url)
@@ -77,7 +77,7 @@ def process_SEC_rss(item):
 
                 msg_count = msg_count + 1
 
-                print("* Added {} sec filings".format(msg_count))
+#                print("* Added {} sec filings".format(msg_count))
             except Exception as e:
                 print "Exception encountered {e}"
     metrics = producer.metrics()
@@ -98,8 +98,11 @@ def build_processing_list():
 
 def bulk_process_months():
     s = build_processing_list()
+    print("Built the list {}".format(s))
     process_list = sc.parallelize(s)
+    print("PARALLELIZED THE LIST")
     process_list.map(lambda x: process_SEC_rss(x))
+    print("Trully finished the map")
 
 
 
