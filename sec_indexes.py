@@ -2,8 +2,8 @@
 import urllib2
 import xmltodict
 import json
-import psycopg2
-from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
+#import psycopg2
+#from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 # sample program
 
