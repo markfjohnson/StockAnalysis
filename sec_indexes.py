@@ -19,7 +19,8 @@ kafka_url = "broker.kafka.l4lb.thisdcos.directory:9092"
 topic_name = "sec_filings"
 
 spark = SparkSession.builder \
-    .master("192.168.1.100") \
+    .master("spark://192.168.1.100") \
+    .config("spark.submit.deployMode","cluster")
     .appName("Read SEC XBRL RSS files into Kafka") \
     .getOrCreate()
 sc = spark.sparkContext
