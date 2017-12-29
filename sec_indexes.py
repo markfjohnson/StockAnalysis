@@ -13,8 +13,8 @@ __all__ = ["SparkSession"]
 
 cur = None
 
-# kafka_url = "broker.kafka.l4lb.thisdcos.directory:9092"
-kafka_url = "localhost:9092"
+kafka_url = "broker.kafka.l4lb.thisdcos.directory:9092"
+#kafka_url = "localhost:9092"
 
 topic_name = "sec_filings"
 
