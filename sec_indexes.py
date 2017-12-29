@@ -92,7 +92,7 @@ def bulk_process_months():
         print("Built the list {}".format(s))
         process_list = sc.parallelize(s)
         print("PARALLELIZED THE LIST")
-        b = process_list.map(lambda x: test_map_output(x))
+        b = process_list.map(lambda x: process_SEC_rss(x))
         print("result ")
         for x in b.collect():
             print x
