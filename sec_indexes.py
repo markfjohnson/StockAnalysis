@@ -95,6 +95,8 @@ def build_processing_list():
     print("Built the processing list: {}".format(len(process_list)))
     return(process_list)
 
+def test_map_output(x):
+    return x
 
 def bulk_process_months():
     try:
@@ -102,7 +104,7 @@ def bulk_process_months():
         print("Built the list {}".format(s))
         process_list = sc.parallelize(s)
         print("PARALLELIZED THE LIST")
-        process_list.map(lambda x: process_SEC_rss(x))
+        process_list.map(lambda x: test_map_output(x))
     except Exception as e:
         print(e)
     finally:
