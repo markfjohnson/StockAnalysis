@@ -37,6 +37,7 @@ def get_value(refEntity, key):
 def process_SEC_rss(item):
     # print("processing SEC filing for: {}", item)
     # print("test it and again")
+    res = []
     index_rss = 'http://www.sec.gov/Archives/edgar/monthly/xbrlrss-{}.xml'.format(item)
     producer = KafkaProducer(bootstrap_servers=kafka_url)
     rss_feed = urllib2.urlopen(index_rss)
@@ -65,11 +66,13 @@ def process_SEC_rss(item):
             }
             jsec = json.dumps(newRow)
             producer.send(topic_name, jsec)
+            res.append(jsec)
             producer.flush()
 
             msg_count = msg_count + 1
 
     producer.close()
+    return(res)
 
 
 def build_processing_list():
@@ -94,8 +97,8 @@ def bulk_process_months():
         print("Built the list {}".format(s))
         process_list = sc.parallelize(s)
         print("PARALLELIZED THE LIST")
-#        b = process_list.map(lambda x: process_SEC_rss(x))
-        b = process_list.map(lambda x: test_map_output(x))
+        b = process_list.map(lambda x: process_SEC_rss(x))
+#        b = process_list.map(lambda x: test_map_output(x))
         print("result ")
         for c in b.collect():
             print "res = {}".format(c)
