@@ -96,10 +96,10 @@ def bulk_process_months():
 #        b = process_list.map(lambda x: process_SEC_rss(x))
         b = process_list.map(lambda x: test_map_output(x))
         print("result ")
-        for x in b.collect():
-            print x
+        for c in b.collect():
+            print "res = {}".format(c)
     except Exception as e:
-        print(e)
+        print "Exception encountered"
     finally:
         print("Trully finished the map")
 
