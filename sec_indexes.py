@@ -82,8 +82,9 @@ def build_processing_list():
 
 
 def test_map_output(x):
-    print "XXX {}".format(x)
-    return x
+    res = "XXX {}".format(x)
+    print "in the map: {}".format(res)
+    return res
 
 
 def bulk_process_months():
@@ -98,7 +99,7 @@ def bulk_process_months():
         print("result ")
         for c in b.collect():
             print "res = {}".format(c)
-    except Exception as e:
+    except Exception as e:        b = process_list.map(lambda x: process_SEC_rss(x))
         print "Exception encountered"
     finally:
         print("Trully finished the map")
