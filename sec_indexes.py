@@ -17,7 +17,7 @@ kafka_url = "broker.kafka.l4lb.thisdcos.directory:9092"
 #kafka_url = "localhost:9092"
 
 topic_name = "sec_filings"
-print("Starting")
+print("Starting Push filings")
 spark = SparkSession.builder \
     .master("spark: //192.168.1.100") \
     .config("spark.submit.deployMode","cluster") \
