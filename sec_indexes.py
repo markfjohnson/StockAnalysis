@@ -99,17 +99,17 @@ def test_map_output(x):
     return x
 
 def bulk_process_months():
+    b = None
     try:
         s = build_processing_list()
         print("Built the list {}".format(s))
         process_list = sc.parallelize(s)
         print("PARALLELIZED THE LIST")
-        process_list.map(lambda x: test_map_output(x))
+        b =process_list.map(lambda x: test_map_output(x))
     except Exception as e:
         print(e)
     finally:
-        print("Trully finished the map")
-
+        print("Trully finished the map {}".format(b))
 
 
 
